@@ -57,9 +57,6 @@ code {
   }
 }
 
-
-
-
 .calc-container {
   padding: 10px;
   border-radius: 1em;
@@ -122,7 +119,7 @@ button:active {
 }
 
 .logo {
-  position: absolute;
+  position: fixed;
   left: 0px;
   bottom: 0px;
   padding-top: 2px;
