@@ -98,6 +98,7 @@ input {
   height: 25px;
   color: white;
   border: solid rgb(36, 36, 36) 1px;
+  word-wrap: break-word;
 }
 
 .calc-button {
