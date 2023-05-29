@@ -94,7 +94,7 @@ input {
 .home-button {
   background-color: #377dbe;
   border-radius: 5px;
-  width: 10%;
+  max-width: 50%;
   height: 25px;
   color: white;
   border: solid rgb(36, 36, 36) 1px;
