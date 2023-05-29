@@ -18,6 +18,7 @@ code {
   width:  100vw; /* For 100% screen width */
   background-color: linear-gradient(115deg, rgba(67,165,224,1) 0%, rgba(38,118,238,1) 0%, rgba(11,52,78,1) 100%); 
   overflow: hidden;
+  position: relative;
   /*display: grid;*/
 }
 
