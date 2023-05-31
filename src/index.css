@@ -16,10 +16,8 @@ code {
 .body {
   height: 100vh; /* For 100% screen height */
   width:  100vw; /* For 100% screen width */
-  background-color: linear-gradient(115deg, rgba(67,165,224,1) 0%, rgba(38,118,238,1) 0%, rgba(11,52,78,1) 100%); 
+  background: linear-gradient(115deg, rgba(67,165,224,1) 0%, rgba(38,118,238,1) 0%, rgba(11,52,78,1) 100%); 
   overflow: hidden;
-  position: relative;
-  /*display: grid;*/
 }
 
 .container {
@@ -40,38 +38,19 @@ code {
   text-align: center;
   color: #dcdbe1;
   padding-bottom: 20px;
-  
 }
 
 .header a, a:visited, a:hover, a:link, a:active {
   color: #dcdbe1;
   text-decoration: none;
+  text-align: center;
 }
 
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .calc-container {
   padding: 10px;
   border-radius: 1em;
-  height: 390px;
-  min-width: 45%;
-
-  /*margin-left: auto;
-  margin-right: auto;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);*/
-
+  width: fit-content;
   margin: auto;
   background-color: #191b28;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -82,39 +61,75 @@ code {
   border: solid black 0.5px;
   color: black;
   border-radius: 5px;
-  width: 99%;
-  height: 65%;
+  
+  height: 10%;
+  display: flex;
+  margin : 0 auto;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+
+.buttons{
+  max-width: 400px;
+  display:flex;
+  flex-wrap: wrap;
 }
 
 input {
-  font-size: 17px;
+  font-size: 26px;
   text-indent: 10px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .home-button {
   background-color: #377dbe;
   border-radius: 5px;
-  max-width: 50%;
+  width: fit-content;
   height: 25px;
   color: white;
-  border: solid rgb(36, 36, 36) 1px;
-  word-wrap: break-word;
+  border: solid rgb(255, 255, 255) 1px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 0 auto;
+  overflow-wrap: break-word;
 }
 
 .calc-button {
-  background-color: #377dbe;
-  color: white;
+  /*background-color: #377dbe;*/
+  color: black;
   border: solid black 1px;
-  width: 100%;
+  width: fit-content;
+
   border-radius: 5px;
   height: 70%;
   outline: none;
-  font-size: 15px;
+  font-size: 20px;
+  flex: 1 25%;
+  padding: 15px;
+  margin-bottom: 3.5px;
+
 }
 
-button:hover {
-  background-color:rgba(212, 212, 212, 0.473);
+.btn-number {
+  background-color:rgb(201, 201, 201);
 }
+
+.btn-operator {
+  background-color:orange;
+}
+
+.btn-equals {
+  background-color:rgb(35, 198, 76);
+}
+
+.btn-clear {
+  background-color:crimson;
+}
+
 
 button:active {
   transform: translateY(4px);

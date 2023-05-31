@@ -16,28 +16,30 @@ function setCursorPos(ctrl, pos) {
   }
 }
 
-const Button = ({value, onClick}) => {
-  return (
+const Button = ({value, onClick, customClass}) => {
+  /*return (
     <td>
       <button className = "calc-button" onClick={onClick}>{value}</button>
     </td>
+  );*/
+  return (
+    <button className = {`calc-button ${customClass}`} onClick={onClick}>{value}</button>
   );
 }
 
 export default function App() {
   const ref = useRef(null);
 
-  const onClear = () => {
+  const onClearAll = () => {
     ref.current.value = "";
   };
 
+  /*const onDel = () => {
+    ref.current.value = ref.current.value.slice(0, -1).trim();
+  }*/
+
   useEffect(() => {
     const keyDown = e => {
-      /*if(e.key === 'Backspace' && !isNumeric(ref.current.value)) {
-        e.preventDefault();
-        ref.current.value = "";
-      }*/
-
       if(e.key === 'Enter') {
         e.preventDefault();
         solve();
@@ -89,6 +91,118 @@ export default function App() {
       <div className='header'>
         <h1>Just A Very Simple Calculator</h1>
         <h2>Creator: Brian Pham</h2>
+        
+          <a href = "https://bp-portfolio.github.io/" target='_blank' rel="noopener noreferrer">
+            <button className = "home-button">HOME PAGE</button>
+          </a>
+        
+      </div>
+
+      <div className='calc-container'>
+        <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} autoFocus id = "input-id" />
+        <div className='buttons'>
+            <Button customClass = 'btn-clear' value = {'CLEAR'} onClick={onClearAll}/>
+            <Button customClass = 'btn-operator' value = {'('} onClick = {e => update('(')}/>
+            <Button customClass = 'btn-operator' value = {')'} onClick = {e => update(')')}/>
+            <Button customClass = 'btn-operator' value = {'^'} onClick = {e => update('^')}/>
+
+            <Button customClass = 'btn-number' value = {'7'} onClick = {e => update(7)}/>
+            <Button customClass = 'btn-number' value = {'8'} onClick = {e => update(8)}/>
+            <Button customClass = 'btn-number' value = {'9'} onClick = {e => update(9)}/>
+            <Button customClass = 'btn-operator' value = {'÷'} onClick = {e => update('/')}/>
+
+            <Button customClass = 'btn-number' value = {'4'} onClick = {e => update(4)}/>
+            <Button customClass = 'btn-number' value = {'5'} onClick = {e => update(5)}/>
+            <Button customClass = 'btn-number' value = {'6'} onClick = {e => update(6)}/>
+            <Button customClass = 'btn-operator' value = {'×'} onClick = {e => update('*')}/>
+
+            <Button customClass = 'btn-number' value = {'1'} onClick = {e => update(1)}/>
+            <Button customClass = 'btn-number' value = {'2'} onClick = {e => update(2)}/>
+            <Button customClass = 'btn-number' value = {'3'} onClick = {e => update(3)}/>
+            <Button customClass = 'btn-operator' value = {'-'} onClick = {e => update('-')}/>
+
+            <Button customClass = 'btn-number' value = {'0'} onClick = {e => update(0)}/>
+            <Button customClass = 'btn-number' value = {'.'} onClick = {e => update('.')}/>
+            <Button customClass = 'btn-equals' value = {'='} onClick = {e => solve()}/>
+            <Button customClass = 'btn-operator' value = {'+'} onClick = {e => update('+')}/>
+        </div>
+      </div>
+      <div className='logo'>
+        <img 
+          src = {logo} 
+          alt = "Logo" 
+          style = {{
+            width: "25px", 
+            height: "25px"
+          }}
+        />
+      </div>
+    </div>
+  );
+
+  /*return (
+    <div className='body'>
+      <div className='header'>
+        <h1>Just A Very Simple Calculator</h1>
+        <h2>Creator: Brian Pham</h2>
+        
+          <a href = "https://bp-portfolio.github.io/" target='_blank' rel="noopener noreferrer">
+            <button className = "home-button">HOME PAGE</button>
+          </a>
+        
+      </div>
+
+      <div className='calc-container'>
+        <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} autoFocus id = "input-id" />
+        <div className='buttons'>
+          <Button customClass = 'btn-clear' value = {'CLEAR'} onClick={onClearAll} />
+          <Button customClass = 'btn-clear' value = {"DELETE"} onClick={onDel}/>
+        </div>
+        <div className='buttons'>
+            <Button customClass = 'btn-operator' value = {'( )'} onClick = {e => update('( )')}/>
+            <Button customClass = 'btn-number' value = {'e'} onClick = {e => update('e')}/>
+            <Button customClass = 'btn-number' value = {'π'} onClick={e => update('π')} />
+            <Button customClass = 'btn-operator' value = {'^'} onClick = {e => update('^')}/>
+
+            <Button customClass = 'btn-number' value = {'7'} onClick = {e => update(7)}/>
+            <Button customClass = 'btn-number' value = {'8'} onClick = {e => update(8)}/>
+            <Button customClass = 'btn-number' value = {'9'} onClick = {e => update(9)}/>
+            <Button customClass = 'btn-operator' value = {'÷'} onClick = {e => update('/')}/>
+
+            <Button customClass = 'btn-number' value = {'4'} onClick = {e => update(4)}/>
+            <Button customClass = 'btn-number' value = {'5'} onClick = {e => update(5)}/>
+            <Button customClass = 'btn-number' value = {'6'} onClick = {e => update(6)}/>
+            <Button customClass = 'btn-operator' value = {'×'} onClick = {e => update('*')}/>
+
+            <Button customClass = 'btn-number' value = {'1'} onClick = {e => update(1)}/>
+            <Button customClass = 'btn-number' value = {'2'} onClick = {e => update(2)}/>
+            <Button customClass = 'btn-number' value = {'3'} onClick = {e => update(3)}/>
+            <Button customClass = 'btn-operator' value = {'-'} onClick = {e => update('-')}/>
+
+            <Button customClass = 'btn-number' value = {'0'} onClick = {e => update(0)}/>
+            <Button customClass = 'btn-number' value = {'.'} onClick = {e => update('.')}/>
+            <Button customClass = 'btn-equals' value = {'='} onClick = {e => solve()}/>
+            <Button customClass = 'btn-operator' value = {'+'} onClick = {e => update('+')}/>
+        </div>
+      </div>
+      <div className='logo'>
+        <img 
+          src = {logo} 
+          alt = "Logo" 
+          style = {{
+            width: "25px", 
+            height: "25px"
+          }}
+        />
+      </div>
+    </div>
+  );*/
+
+  /*return (
+    <div className='body'>
+      <div className='header'>
+        <h1>Just A Very Simple Calculator</h1>
+        <h2>Creator: Brian Pham</h2>
         <button className = "home-button">
           <a href = "https://bp-portfolio.github.io/" target='_blank' rel="noopener noreferrer">HOME PAGE</a>
         </button>
@@ -120,13 +234,13 @@ export default function App() {
             <Button value = {'7'} onClick = {e => update(7)}/>
             <Button value = {'8'} onClick = {e => update(8)}/>
             <Button value = {'9'} onClick = {e => update(9)}/>
-            <Button value = {'/'} onClick = {e => update('/')}/>
+            <Button value = {'÷'} onClick = {e => update('/')}/>
           </tr>
           <tr>
             <Button value = {'4'} onClick = {e => update(4)}/>
             <Button value = {'5'} onClick = {e => update(5)}/>
             <Button value = {'6'} onClick = {e => update(6)}/>
-            <Button value = {'*'} onClick = {e => update('*')}/>
+            <Button value = {'×'} onClick = {e => update('*')}/>
           </tr>
           <tr>
             <Button value = {'1'} onClick = {e => update(1)}/>
@@ -153,7 +267,6 @@ export default function App() {
         />
       </div>
     </div>
-    
-  );
+  );*/
 }
 
