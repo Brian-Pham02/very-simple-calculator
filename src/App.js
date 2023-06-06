@@ -48,7 +48,7 @@ export default function App() {
   }, []);
 
   const update = (value) => {
-    ref.current.focus();
+    //ref.current.focus();
 
     if(value === '()') {
       let input = document.getElementById("input-id");
