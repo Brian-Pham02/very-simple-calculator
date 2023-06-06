@@ -28,11 +28,11 @@ code {
   border-radius: 1em;
 }
 
-.calculator {
+.calculator-container {
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin:auto;
   width: fit-content;
+  margin: auto;
   background-color: #191b28;
 }
 
