@@ -92,7 +92,7 @@ export default function App() {
       </div>
 
       <div className='calculator-container'>
-        <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} autoFocus id = "input-id" />
+        <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} autoFocus id = "input-id" readOnly/>
         <div className='calculator-keys'>
           <Button customClass = 'btn-clear' value = {'AC'} onClick={onClearAll}/>
           <Button customClass = 'btn-operator' value = {'('} onClick = {e => update('(')}/>
