@@ -31,11 +31,8 @@ code {
 .calculator {
   border: 1px solid #ccc;
   border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: max-content;
+  margin:auto;
+  width: 45%;
   background-color: #191b28;
 }
 
