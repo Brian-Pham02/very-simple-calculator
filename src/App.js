@@ -98,7 +98,6 @@ export default function App() {
           <Button customClass = 'btn-operator' value = {'('} onClick = {e => update('(')}/>
           <Button customClass = 'btn-operator' value = {')'} onClick = {e => update(')')}/>
           <Button customClass = 'btn-operator' value = {'^'} onClick = {e => update('^')}/>
-        
           
           <Button customClass = 'btn-number' value = {'7'} onClick = {e => update(7)}/>
           <Button customClass = 'btn-number' value = {'8'} onClick = {e => update(8)}/>

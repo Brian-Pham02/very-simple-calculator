@@ -3,6 +3,7 @@
   font-weight: bold;
   margin:0;
   padding: 0;
+  overflow: hidden;
   /*background: linear-gradient(115deg, rgba(67,165,224,1) 0%, rgba(38,118,238,1) 0%, rgba(11,52,78,1) 100%);*/
 }
 
@@ -56,12 +57,11 @@ code {
   align-items: center;
 }
 
-
-
 .header {
   text-align: center;
   color: #dcdbe1;
-  padding-bottom: 20px;
+  line-height: 45px;
+  padding-bottom: 15px;
 }
 
 .header a, a:visited, a:hover, a:link, a:active {
@@ -69,7 +69,6 @@ code {
   text-decoration: none;
   text-align: center;
 }
-
 
 .calc-container {
   padding: 10px;
@@ -80,7 +79,7 @@ code {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-.calc-display {
+/*.calc-display {
   background-color: #dcdbe1;
   border: solid black 0.5px;
   color: black;
@@ -91,7 +90,7 @@ code {
   margin : 0 auto;
   justify-content: flex-end;
   margin-bottom: 10px;
-}
+}*/
 
 
 .buttons {
@@ -111,12 +110,23 @@ input {
   text-indent: 10px;
   box-sizing: border-box;
   width: 100%;
+
+  background-color: #dcdbe1;
+  border: solid black 0.5px;
+  color: black;
+  border-radius: 5px;
+  
+  height: 50px;
+  display: flex;
+  margin : 0 auto;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
 .home-button {
   background-color: #377dbe;
   border-radius: 5px;
-  width: fit-content;
+  width: 105px;
   height: 25px;
   color: white;
   border: solid rgb(255, 255, 255) 1px;
@@ -152,7 +162,7 @@ input {
   background-image: linear-gradient(to bottom,transparent,transparent 50%,rgba(0,0,0,.04));
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 0 rgba(255,255,255,.15), 0 1px 0 0 rgba(255,255,255,.15);
   text-shadow: 0 1px rgba(255,255,255,.4);
-  width: 100%;
+  width: 75px;
 }
 
 .btn-number {
