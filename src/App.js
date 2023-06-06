@@ -82,7 +82,7 @@ export default function App() {
   };
   
   return (
-    <div className='body'>
+    <div>
       <div className='header'>
         <h1>Just A Very Simple Calculator</h1>
         <h2>Creator: Brian Pham</h2>
