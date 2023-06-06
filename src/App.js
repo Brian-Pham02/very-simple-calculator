@@ -93,7 +93,6 @@ export default function App() {
 
       <div className='calculator'>
         <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} autoFocus id = "input-id" />
-      
         <div className='calculator-keys'>
           <Button customClass = 'btn-clear' value = {'AC'} onClick={onClearAll}/>
           <Button customClass = 'btn-operator' value = {'('} onClick = {e => update('(')}/>
@@ -121,7 +120,16 @@ export default function App() {
           <Button customClass = 'btn-equals' value = {'='} onClick = {e => solve()}/>
           <Button customClass = 'btn-operator' value = {'+'} onClick = {e => update('+')}/>
         </div>
-      
+      </div>
+      <div className='logo'>
+        <img 
+          src = {logo} 
+          alt = "Logo" 
+          style = {{
+            width: "25px", 
+            height: "25px"
+          }}
+        />
       </div>
     </div>
   );
