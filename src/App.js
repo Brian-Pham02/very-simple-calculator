@@ -3,18 +3,8 @@ import {evaluate, isOperator} from './calculator.js';
 
 let logo = "https://raw.githubusercontent.com/BP-Portfolio/BP-Portfolio.github.io/main/Images/Logo/PersonalLogo_Circle.png";
 
-function setCursorPos(ctrl, pos) {
-  if(ctrl.setSelectionRange) {
-    ctrl.focus();
-    ctrl.setSelectionRange(pos, pos);
-  } else if(ctrl.createTextRange) {
-    var range = ctrl.createTextRange();
-    range.collapse(true);
-    range.moveEnd('character', pos);
-    range.moveStart('character', pos);
-    range.select();
-  }
-}
+let open = 0;
+let close = 0;
 
 const Button = ({value, onClick, customClass}) => {
   return (
@@ -47,19 +37,22 @@ export default function App() {
     };
   }, []);
 
-  const update = (value) => {
-    //ref.current.focus();
-
-    if(value === '()') {
-      let input = document.getElementById("input-id");
-      setCursorPos(input, input.value.length - 1);
-    }
-
+  const update = (value) => {    
     if(isOperator(value)) {
       ref.current.value += (' ' + value + ' ');
     } else {
-      ref.current.value += value;
-    }
+      if(value === '(')
+        open++;
+
+      if(value === ')') {
+        if(open > 0 && ref.current.value.slice(-1) !== ' ' && open !== close) {
+          ref.current.value += value;
+          close++;
+        }
+      } else {
+        ref.current.value += value;
+      }
+    }  
   };
 
   const format = () => {
@@ -79,6 +72,8 @@ export default function App() {
 
   const solve = () => {
     ref.current.value = evaluate(ref.current.value);
+    open = 0;
+    close = 0;
   };
   
   return (
@@ -92,7 +87,7 @@ export default function App() {
       </div>
 
       <div className='calculator-container'>
-        <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} autoFocus id = "input-id" readOnly/>
+        <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} id = "input-id" readOnly/>
         <div className='calculator-keys'>
           <Button customClass = 'btn-clear' value = {'AC'} onClick={onClearAll}/>
           <Button customClass = 'btn-operator' value = {'('} onClick = {e => update('(')}/>
@@ -132,59 +127,5 @@ export default function App() {
       </div>
     </div>
   );
-
-  /*return (
-    <div className='body'>
-      <div className='header'>
-        <h1>Just A Very Simple Calculator</h1>
-        <h2>Creator: Brian Pham</h2>
-        
-          <a href = "https://bp-portfolio.github.io/" target='_blank' rel="noopener noreferrer">
-            <button className = "home-button">HOME PAGE</button>
-          </a>
-        
-      </div>
-
-      <div className='calc-container'>
-        <input ref = {ref} className = 'calc-display' type = 'text' onChange = {format} autoFocus id = "input-id" />
-        <div className='buttons'>
-            <Button customClass = 'btn-clear' value = {'CLEAR'} onClick={onClearAll}/>
-            <Button customClass = 'btn-operator' value = {'('} onClick = {e => update('(')}/>
-            <Button customClass = 'btn-operator' value = {')'} onClick = {e => update(')')}/>
-            <Button customClass = 'btn-operator' value = {'^'} onClick = {e => update('^')}/>
-
-            <Button customClass = 'btn-number' value = {'7'} onClick = {e => update(7)}/>
-            <Button customClass = 'btn-number' value = {'8'} onClick = {e => update(8)}/>
-            <Button customClass = 'btn-number' value = {'9'} onClick = {e => update(9)}/>
-            <Button customClass = 'btn-operator' value = {'÷'} onClick = {e => update('/')}/>
-
-            <Button customClass = 'btn-number' value = {'4'} onClick = {e => update(4)}/>
-            <Button customClass = 'btn-number' value = {'5'} onClick = {e => update(5)}/>
-            <Button customClass = 'btn-number' value = {'6'} onClick = {e => update(6)}/>
-            <Button customClass = 'btn-operator' value = {'×'} onClick = {e => update('*')}/>
-
-            <Button customClass = 'btn-number' value = {'1'} onClick = {e => update(1)}/>
-            <Button customClass = 'btn-number' value = {'2'} onClick = {e => update(2)}/>
-            <Button customClass = 'btn-number' value = {'3'} onClick = {e => update(3)}/>
-            <Button customClass = 'btn-operator' value = {'-'} onClick = {e => update('-')}/>
-
-            <Button customClass = 'btn-number' value = {'0'} onClick = {e => update(0)}/>
-            <Button customClass = 'btn-number' value = {'.'} onClick = {e => update('.')}/>
-            <Button customClass = 'btn-equals' value = {'='} onClick = {e => solve()}/>
-            <Button customClass = 'btn-operator' value = {'+'} onClick = {e => update('+')}/>
-        </div>
-      </div>
-      <div className='logo'>
-        <img 
-          src = {logo} 
-          alt = "Logo" 
-          style = {{
-            width: "25px", 
-            height: "25px"
-          }}
-        />
-      </div>
-    </div>
-  );*/
 }
 

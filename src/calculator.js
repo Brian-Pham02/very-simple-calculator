@@ -5,7 +5,7 @@ function isNumeric(expr) {
 }
 
 function isOperator(c) {
-    return ['^', '*', '/', '%', '+', '-'].includes(c);
+    return ['^', '*', '/', '+', '-'].includes(c);
 }
 
 function precedence(c) {
@@ -47,8 +47,25 @@ function applyOp(op, a, b) {
     }
 }
 
+const fixParentheses = (str) => {
+    let orig = str;
+  
+    //Repeatedly remove all instances of "()" until there are none left
+    while (str.includes("()"))
+      str = str.replace(/\(\)/g, '');
+      
+    //Count the number of ")" and "(" left in the string
+    let amtOpeningParensNeeded = (str.match(/\)/g) || []).length;
+    let amtClosingParensNeeded = (str.match(/\(/g) || []).length;
+    
+    //Add that many "(" and ")" to the string, respectively
+    return "(".repeat(amtOpeningParensNeeded) + orig + ")".repeat(amtClosingParensNeeded);
+};
+
 const formatExpression = (expression) => {
+
     let formatted = expression.replace(/\s+/g, " ");
+    formatted = fixParentheses(formatted);
 
     for(let i = 0; i < formatted.length; i++) {
         let c = formatted[i];
@@ -56,13 +73,14 @@ const formatExpression = (expression) => {
             formatted = formatted.replaceAll(c, " " + c + " ").replace(/\s+/g, " ");
         }
     }
-
+    
     formatted = formatted  
                 .replaceAll(" - - ", " + ") 
                 .replaceAll(" * - ", " * -") 
                 .replaceAll(" / - ", " / -")
                 .replaceAll(" ^ - ", " ^ -")
                 .replaceAll(" + - ", " - ")
+                .replaceAll(" - + ", " - ")
                 .replaceAll(" ( - ", " ( -")
                 .replaceAll(") (", ") * (")
                 .replaceAll(" * * ", " ^ ")
@@ -72,47 +90,19 @@ const formatExpression = (expression) => {
     if(formatted.indexOf("-") === 0)
         formatted = formatted.replace("- ", "-"); 
 
-    
     let tokens = formatted.split(' ');
 
     for(let i = 0; i < tokens.length - 1; i++) {
-        if((isNumeric(tokens[i]) || tokens[i] === 'e' || tokens[i] === 'π') && tokens[i + 1] === '(') {
+        if(isNumeric(tokens[i]) && tokens[i + 1] === '(') {
             tokens.splice(i + 1, 0, '*');
         }
 
-        if(tokens[i] === ')' && (isNumeric(tokens[i + 1]) || tokens[i + 1] === 'e' || tokens[i + 1] === 'π')) {
+        if(tokens[i] === ')' && isNumeric(tokens[i + 1])) {
             tokens.splice(i + 1, 0, '*');
         }
     }
 
-    const reg1 = /^[+-]?((\d+(\.\d*)?)|(\.\d+))e/g;
-    const reg2 = /^[+-]?((\d+(\.\d*)?)|(\.\d+))π/g;
-    const reg3 = /^e((\d+(\.\d*)?)|(\.\d+))/g;
-    const reg4 = /^π((\d+(\.\d*)?)|(\.\d+))/g;
-
-    for(let i = 0; i < tokens.length; i++) {
-        if(reg1.test(tokens[i])) {
-            let arr = tokens[i].split('e').join(' * e');
-            tokens[i] = arr;
-        }
-
-        if(reg2.test(tokens[i])) {
-            let arr = tokens[i].split('π').join(' * π');
-            tokens[i] = arr;
-        }
-
-        if(reg3.test(tokens[i])) {
-            let arr = tokens[i].split('e').join('e * ');
-            tokens[i] = arr;
-        }
-
-        if(reg4.test(tokens[i])) {
-            let arr = tokens[i].split('π').join('π * ');
-            tokens[i] = arr;
-        }
-    }
-
-    formatted = tokens.join(' ').replaceAll("e", "" + Math.E).replaceAll("π", "" + Math.PI);
+    formatted = tokens.join(' ');
     return formatted;
 };
 
@@ -121,7 +111,6 @@ function evaluate(expression) {
     let tokens = format.split(' ');
     let values = [];
     let ops = [];
-
 
     for(let i = 0; i < tokens.length; i++) {
         let c = tokens[i];
@@ -149,5 +138,5 @@ function evaluate(expression) {
     }
 
     return values.pop();
-    //return `Expression: ${format}`
+    //return `Expression: ${format}`;
 }
