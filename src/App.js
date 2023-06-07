@@ -81,9 +81,9 @@ export default function App() {
       <div className='header'>
         <h1>Just A Very Simple Calculator</h1>
         <h2>Creator: Brian Pham</h2>
-          <a href = "https://bp-portfolio.github.io/" target='_blank' rel="noopener noreferrer">
-            <button className = "home-button">HOME PAGE</button>
-          </a>
+        <a href = "https://bp-portfolio.github.io/" target='_blank' rel="noopener noreferrer">
+          <button className = "home-button">HOME PAGE</button>
+        </a>
       </div>
 
       <div className='calculator-container'>
