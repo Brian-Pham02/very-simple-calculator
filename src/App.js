@@ -1,10 +1,11 @@
 import React, {useRef, useEffect} from 'react';
-import {evaluate, isOperator} from './calculator.js';
+import {evaluate, isOperator, isNumeric} from './calculator.js';
 
 let logo = "https://raw.githubusercontent.com/BP-Portfolio/BP-Portfolio.github.io/main/Images/Logo/PersonalLogo_Circle.png";
-
 let open = 0;
 let close = 0;
+let solved = false;
+
 
 const Button = ({value, onClick, customClass}) => {
   return (
@@ -38,6 +39,14 @@ export default function App() {
   }, []);
 
   const update = (value) => {    
+    // Clear input after solve if next value is numeric
+    if(solved) {
+      solved = false;
+      if(isNumeric(value)) {
+        onClearAll();
+      }
+    }
+
     if(isOperator(value)) {
       ref.current.value += (' ' + value + ' ');
     } else {
@@ -50,7 +59,7 @@ export default function App() {
           close++;
         }
       } else {
-        ref.current.value += value;
+        ref.current.value += value;  
       }
     }  
   };
@@ -60,7 +69,7 @@ export default function App() {
     let value = "";
     
     for(let i = 0; i < copy.length; i++) {
-      if(copy[i] === '+' || copy[i] === '-' || copy[i] === '*' || copy[i] === '/' || copy[i] === '^') {        
+      if(isOperator(copy[i])) {        
         value += (" " + copy[i] + " ");
       } else {
         value += copy[i];
@@ -74,6 +83,7 @@ export default function App() {
     ref.current.value = evaluate(ref.current.value);
     open = 0;
     close = 0;
+    solved = true;
   };
   
   return (

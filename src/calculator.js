@@ -1,4 +1,4 @@
-export {isOperator, evaluate}
+export {isOperator, evaluate, isNumeric}
 
 function isNumeric(expr) {
     return !isNaN(expr);
@@ -35,11 +35,6 @@ function applyOp(op, a, b) {
                 return 'Undefined';
             }
             return b / a;
-        case '%':
-            if(a === 0) {
-                return 'Undefined';
-            }
-            return b % a;
         case '^':
             return Math.pow(b, a);
         default:
