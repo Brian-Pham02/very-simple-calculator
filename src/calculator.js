@@ -36,7 +36,7 @@ function applyOp(op, a, b) {
             }
             return b / a;
         case '^':
-            return Math.pow(b, a);
+            return b ** a;
         default:
             return '';
     }
