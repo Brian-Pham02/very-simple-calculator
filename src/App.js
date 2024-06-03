@@ -1,7 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {evaluate, isOperator, isNumeric} from './calculator.js';
 
-let logo = "./public/PersonalLogo_Circle.png";
+let logo = "./%PUBLIC_URL%/PersonalLogo_Circle.png";
 let open = 0;
 let close = 0;
 let solved = false;
